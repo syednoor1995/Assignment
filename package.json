@@ -8,9 +8,10 @@
   "author": "Leonardo Roese",
   "license": "MIT",
   "scripts": {
-    "start": "npx nodemon src/index.ts",
+    "start": "node build/index.js",
+   "build": "tsc",
+  "postinstall": "npm run build",
    
-    "build": "tsc -p tsconfig.prod.json",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
