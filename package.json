@@ -8,7 +8,7 @@
   "author": "Leonardo Roese",
   "license": "MIT",
   "scripts": {
-    "start": "node src/index.ts",
+    "start": "ts-node src/index.ts",
    "build": "tsc",
   "postinstall": "npm run build",
    
