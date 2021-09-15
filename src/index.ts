@@ -16,7 +16,7 @@ const startServer = () => {
         schema,
         context
     })
-    server.listen().then(({url})=>{
+    server.listen({ port: process.env.PORT || 4000 }).then(({url})=>{
         console.log(`Ready at ${url}graphql`)
     })
     .catch(err=> console.log(err))
