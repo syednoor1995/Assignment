@@ -25,7 +25,7 @@ export const completeOrder = async (quantity:string  ,productId:string) : Promis
         return prisma.order.create({
             data:{
                 productId,
-                totalPrice: parseInt(price) * parseInt(product.quantity)
+                totalPrice: 300
             }
         })
     }
