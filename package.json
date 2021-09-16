@@ -8,15 +8,9 @@
   "author": "Leonardo Roese",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/index.ts",
-   "build": "tsc",
-  "postinstall": "npm run build",
-   
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "dev": "nodemon",
+    "build": "rimraf ./build && tsc",
+    "start": "npm run build && node build/index.js",
     "generate": "graphql-codegen --config codegen.yml",
     "prisma:studio": "npx prisma studio",
     "generate:migration": "npx prisma migerate dev"
@@ -31,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "commitizen": "^4.2.4",
+    "rimraf": "^3.0.2",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "^7.31.0",
     "eslint-config-airbnb-base": "^14.2.1",
