@@ -1,7 +1,6 @@
 {
   "name": "graphql-ts-prisma-codegen-postgres-apolloserver-tutorial",
   "version": "1.0.0",
-  "type":"module",
   "description": "Graphql setup",
   "main": "index.js",
   "repository": "https://github.com/leoroese/blog-tube",
