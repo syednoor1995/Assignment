@@ -3,6 +3,7 @@ import getAllCategoryQuery from "./getAllCategoryQuery";
 import getAllProduct from "./getAllProduct";
 import getAllCartQuery from "./getAllCart";
 import getAllOrder from "./getAllOrder";
+import getAllUserQuery from "./getAllUser";
 
 const query = new GraphQLObjectType({
     name:"Query",
@@ -10,7 +11,8 @@ const query = new GraphQLObjectType({
         category: getAllCategoryQuery,
         product:getAllProduct,
         cart:getAllCartQuery,
-        order:getAllOrder
+        order:getAllOrder,
+        user:getAllUserQuery
         
     }
 })

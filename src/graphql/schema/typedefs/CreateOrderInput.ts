@@ -7,6 +7,10 @@ import GqlProduct from "./GqlProduct";
      fields: {
          
         
+       userId:{
+        type:GraphQLString,
+        description:"id of the user who added product to cart"
+       },
         productId: {
             type:GraphQLString,
             description:"name of the category"

@@ -1,19 +1,20 @@
 {
   "name": "graphql-ts-prisma-codegen-postgres-apolloserver-tutorial",
   "version": "1.0.0",
-  "type":"module",
   "description": "Graphql setup",
   "main": "index.js",
   "repository": "https://github.com/leoroese/blog-tube",
   "author": "Leonardo Roese",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon",
-    "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js",
+    "dev": "nodemon src/index.ts",
+    "start": "npm run build && node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
+    "build": "tsc -p tsconfig.prod.json",
     "generate": "graphql-codegen --config codegen.yml",
     "prisma:studio": "npx prisma studio",
-    "generate:migration": "npx prisma migerate dev"
+    "generate:migration": "npx prisma migrate dev --preview-feature",
+    "generate:migration:prod": "npx prisma db push --preview-feature"
+    
   },
   "devDependencies": {
     "@graphql-codegen/cli": "2.2.0",

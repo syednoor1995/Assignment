@@ -1,4 +1,4 @@
-import {   GraphQLInputObjectType,  GraphQLString } from "graphql";
+import {   GraphQLInputObjectType,  GraphQLInt,  GraphQLString } from "graphql";
 
  const CreateCartInput = new GraphQLInputObjectType({
      name : "CreateCartInput",
@@ -13,6 +13,10 @@ import {   GraphQLInputObjectType,  GraphQLString } from "graphql";
            type:GraphQLString,
            description:"id of the product added to cart"
        },
+       userId:{
+        type:GraphQLString,
+        description:"id of the user who added product to cart"
+       }
      }
  })
 

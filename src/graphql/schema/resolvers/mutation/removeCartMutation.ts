@@ -17,10 +17,10 @@ const removeCartMutation = {
     },
     resolve : async(
         __source:unknown,
-        {input:{quantity ,productId}}:any,
+        {input:{quantity ,productId,userId}}:any,
         __context: IApolloServerContext
     ): Promise<Cart|null> => {
-        return removeFromCart(quantity ,productId)
+        return removeFromCart(quantity ,productId,userId)
     }
 }
 

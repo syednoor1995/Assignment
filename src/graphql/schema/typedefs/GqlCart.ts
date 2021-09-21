@@ -1,5 +1,6 @@
 import {  GraphQLID, GraphQLList, GraphQLNonNull, GraphQLObjectType,  GraphQLString } from "graphql";
 import GqlProduct from "./GqlProduct";
+import GqlUser from "./GqlUser";
 
 
 
@@ -19,10 +20,19 @@ import GqlProduct from "./GqlProduct";
             type:GraphQLString,
             description:"id of the product added to cart"
         },
+        userId:{
+            type:GraphQLString,
+            description:"id of the user added to cart"
+        },
         Product:{
             type:GqlProduct,
-            description:"id of the product added to cart"
+            description:"product details"
         },
+        User:{
+            type:GqlUser,
+            description:"user details"
+        },
+
      }
  })
 

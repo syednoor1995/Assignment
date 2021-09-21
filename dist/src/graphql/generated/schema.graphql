@@ -1,0 +1,131 @@
+type Query {
+  category: [Category]
+  product: [product]
+  cart: [cart]
+  order: [Order]
+}
+
+"""A category"""
+type Category {
+  """id of the category"""
+  id: ID!
+
+  """name of the category"""
+  name: String
+}
+
+"""A product"""
+type product {
+  """id of the product"""
+  id: ID!
+
+  """name of the product"""
+  name: String
+
+  """description of the product"""
+  description: String
+
+  """description of the product"""
+  price: Float
+
+  """category of the product"""
+  Category: [Category]
+}
+
+"""A cart"""
+type cart {
+  """id of the cart"""
+  id: ID!
+
+  """quantity of the product added to cart"""
+  quantity: String
+
+  """id of the product added to cart"""
+  productId: String
+
+  """id of the product added to cart"""
+  Product: product
+}
+
+"""Order history"""
+type Order {
+  """id of the category"""
+  id: ID!
+
+  """name of the category"""
+  totalPrice: String
+
+  """name of the category"""
+  productId: String
+
+  """id of the product added to cart"""
+  Product: product
+}
+
+type Mutation {
+  createCategory(
+    """category input to be craeted"""
+    input: CreateCategoryInput!
+  ): Category
+  createProduct(
+    """product input to be craeted"""
+    input: CreateproductInput!
+  ): product
+  addCart(
+    """product input to be craeted"""
+    input: CreateCartInput!
+  ): cart
+  removeCart(
+    """product input to be craeted"""
+    input: RemoveCartInput!
+  ): cart
+  completeOrder(
+    """product input to be craeted"""
+    input: CreateOrderInput!
+  ): Order
+}
+
+"""Create category input"""
+input CreateCategoryInput {
+  """An arbitrary integar"""
+  name: String!
+}
+
+"""Create product input"""
+input CreateproductInput {
+  """An arbitrary integar"""
+  name: String!
+
+  """An arbitrary integar"""
+  description: String!
+
+  """An arbitrary integar"""
+  categoryId: String!
+
+  """description of the product"""
+  price: Float
+}
+
+"""Create cart input"""
+input CreateCartInput {
+  """quantity of the product added to cart"""
+  quantity: String
+
+  """id of the product added to cart"""
+  productId: String
+}
+
+"""remove cart input"""
+input RemoveCartInput {
+  """quantity of the product added to cart"""
+  quantity: String
+
+  """id of the product added to cart"""
+  productId: String
+}
+
+"""Create order input"""
+input CreateOrderInput {
+  """name of the category"""
+  productId: String
+}

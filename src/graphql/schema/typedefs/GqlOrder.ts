@@ -1,5 +1,6 @@
 import {  GraphQLID, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import GqlProduct from "./GqlProduct";
+import GqlUser from "./GqlUser";
 
  const GqlOrder = new GraphQLObjectType({
      name : "Order",
@@ -20,6 +21,10 @@ import GqlProduct from "./GqlProduct";
         Product:{
             type:GqlProduct,
             description:"id of the product added to cart"
+        },
+        User:{
+            type:GqlUser,
+            description:"user data"
         },
      }
  })

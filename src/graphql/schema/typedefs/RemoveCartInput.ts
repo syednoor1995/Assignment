@@ -13,6 +13,10 @@ import {   GraphQLInputObjectType,  GraphQLString } from "graphql";
            type:GraphQLString,
            description:"id of the product added to cart"
        },
+       userId:{
+        type:GraphQLString,
+        description:"id of the user who added product to cart"
+       }
      }
  })
 

@@ -28,8 +28,11 @@ model Cart {
   updatedAt DateTime @updatedAt
   quantity  Int
   Product   Product? @relation(fields: [productId], references: [id])
-  productId String?  @unique
+  productId String?
 
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+  @@unique([userId, productId])
 }
 
 model Category {
@@ -48,4 +51,16 @@ model Order {
   Product    Product? @relation(fields: [productId], references: [id])
   productId  String?
 
+  User   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model User {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
+  name      String?
+  orders    Order[]
+  carts     Cart[]
 }

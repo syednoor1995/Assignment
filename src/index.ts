@@ -5,6 +5,9 @@ import { performAstCodegen } from './codegen';
 import prisma from "@src/prisma/client"
 import { IApolloServerContext} from "@src/interfaces/IApolloServerContext"
 // dotenv.config()
+import {
+    ApolloServerPluginLandingPageGraphQLPlayground
+  } from "apollo-server-core";
 
 const startServer = () => {
     performAstCodegen()
@@ -14,9 +17,12 @@ const startServer = () => {
     }
     const server = new ApolloServer({
         schema,
-        context
+        context,
+        plugins: [
+            ApolloServerPluginLandingPageGraphQLPlayground(),
+          ],
     })
-    server.listen({ port: process.env.PORT || 4000 }).then(({url})=>{
+    server.listen().then(({url})=>{
         console.log(`Ready at ${url}graphql`)
     })
     .catch(err=> console.log(err))

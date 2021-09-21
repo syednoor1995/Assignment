@@ -17,10 +17,10 @@ const createCartMutation = {
     },
     resolve : async(
         __source:unknown,
-        {input:{totalPrice ,productId}}:any,
+        {input:{productId,userId}}:any,
         __context: IApolloServerContext
     ): Promise<Order|null> => {
-        return completeOrder(totalPrice  ,productId)
+        return completeOrder(productId, userId)
     }
 }
 

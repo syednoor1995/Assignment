@@ -2,7 +2,8 @@ type Query {
   category: [Category]
   product: [product]
   cart: [cart]
-  order: [Order]
+  order(userId: String): [Order]
+  user: [User]
 }
 
 """A category"""
@@ -43,8 +44,26 @@ type cart {
   """id of the product added to cart"""
   productId: String
 
-  """id of the product added to cart"""
+  """id of the user added to cart"""
+  userId: String
+
+  """product details"""
   Product: product
+
+  """user details"""
+  User: User
+}
+
+"""A User"""
+type User {
+  """id of the User"""
+  id: ID!
+
+  """name of the User"""
+  name: String
+
+  """email of the User"""
+  email: String
 }
 
 """Order history"""
@@ -60,6 +79,9 @@ type Order {
 
   """id of the product added to cart"""
   Product: product
+
+  """user data"""
+  User: User
 }
 
 type Mutation {
@@ -83,6 +105,10 @@ type Mutation {
     """product input to be craeted"""
     input: CreateOrderInput!
   ): Order
+  createUser(
+    """user input to be craeted"""
+    input: CreateUserInput!
+  ): User
 }
 
 """Create category input"""
@@ -113,6 +139,9 @@ input CreateCartInput {
 
   """id of the product added to cart"""
   productId: String
+
+  """id of the user who added product to cart"""
+  userId: String
 }
 
 """remove cart input"""
@@ -122,10 +151,25 @@ input RemoveCartInput {
 
   """id of the product added to cart"""
   productId: String
+
+  """id of the user who added product to cart"""
+  userId: String
 }
 
 """Create order input"""
 input CreateOrderInput {
+  """id of the user who added product to cart"""
+  userId: String
+
   """name of the category"""
   productId: String
+}
+
+"""Create user input"""
+input CreateUserInput {
+  """name of user"""
+  name: String
+
+  """email of the user"""
+  email: String
 }

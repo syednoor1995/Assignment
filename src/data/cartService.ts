@@ -14,19 +14,22 @@ export const getAllCart = async (): Promise<Cart[]> => {
 }
 
 //create cart
-export const addToCart = async (quantity:string  ,productId:string) : Promise<Cart> => {
-    const product = await prisma.cart.findFirst({ where: { productId:productId } ,include: {
+export const addToCart = async (quantity:string  ,productId:string,userId:string) : Promise<Cart> => {
+
+    const product = await prisma.cart.findFirst({ where: { productId:productId,userId:userId } ,include: {
       Product: true,
+      User:true
      },})
-    
+    console.log(product,userId)
     
     if(product){
         //already in cart then update the quantity with the previous
         const quantityUpdated = product.quantity + parseInt(quantity)
         return prisma.cart.update({
-            where: { productId:productId }
+            where: { id:product.id  }
             ,include: {
               Product: true,
+              User:true
              },
             data: {
               quantity: quantityUpdated,
@@ -39,11 +42,15 @@ export const addToCart = async (quantity:string  ,productId:string) : Promise<Ca
         return prisma.cart.create({
           include: {
             Product: true,
+            User:true
            },
             data: {
                 quantity:parseInt(quantity),
                 Product: {
                   connect: { id: productId},
+                },
+                User: {
+                  connect: { id: userId},
                 },
               },
             })
@@ -53,9 +60,10 @@ export const addToCart = async (quantity:string  ,productId:string) : Promise<Ca
 }
 
 //remove cart
-export const removeFromCart = async (quantity:string  ,productId:string) : Promise<Cart|null> => {
-  const product = await prisma.cart.findFirst({ where: { productId:productId } ,include: {
+export const removeFromCart = async (quantity:string  ,productId:string,userId:string) : Promise<Cart|null> => {
+  const product = await prisma.cart.findFirst({ where: { productId:productId,userId:userId } ,include: {
     Product: true,
+    User:true
    },})
   
   
@@ -65,15 +73,17 @@ export const removeFromCart = async (quantity:string  ,productId:string) : Promi
       if (quantityUpdated === 0 )
       {
         return prisma.cart.delete({
-          where: { productId:productId },include: {
+          where: { id:product.id },include: {
             Product: true,
+            User:true
            },
           
         })
       }
       return prisma.cart.update({
-          where: { productId:productId },include: {
+          where: { id:product.id },include: {
             Product: true,
+            User:true
            },
           data: {
             quantity: quantityUpdated,

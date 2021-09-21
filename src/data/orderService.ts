@@ -3,10 +3,14 @@ import prisma from "@src/prisma/client"
 
 
 // get all order
-export const getOrderHistory = async (): Promise<Order[]> => {
+export const getOrderHistory = async (userId:string): Promise<Order[]> => {
     const result = await prisma.order.findMany({
+        where:{
+            userId:userId
+        },
         include: {
             Product: true,
+            User:true
            },
     })
    
@@ -14,9 +18,10 @@ export const getOrderHistory = async (): Promise<Order[]> => {
 }
 
 //complete order
-export const completeOrder = async (quantity:string  ,productId:string) : Promise<Order|null> => {
-    const product = await prisma.cart.findFirst({ where: { productId:productId } ,include: {
+export const completeOrder = async (productId:string, userId:string) : Promise<Order|null> => {
+    const product = await prisma.cart.findFirst({ where: { productId:productId,userId:userId } ,include: {
         Product: true,
+        User:true
     },})
     if(product){
         //if product is present in cart complete the order
@@ -24,8 +29,9 @@ export const completeOrder = async (quantity:string  ,productId:string) : Promis
         
         return prisma.order.create({
             data:{
+                userId,
                 productId,
-                totalPrice: 300
+                totalPrice: Number(price) * product.quantity
             }
         })
     }

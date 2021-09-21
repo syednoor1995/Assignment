@@ -1,22 +1,28 @@
 import { getOrderHistory } from "@src/data/orderService";
 import { Order } from "@prisma/client";
 import { IApolloServerContext } from "@src/interfaces/IApolloServerContext";
-import { GraphQLList } from "graphql";
+import { GraphQLInt, GraphQLList, GraphQLString } from "graphql";
 import GqlOrder from "../../typedefs/GqlOrder";
 
 
 
 
-const getAllOrderQuery = {
+const getAllOrder =  {
     type:GraphQLList(GqlOrder),
+    args: {
+        userId: {
+          type: GraphQLString
+        }
+      },
     resolve : async(
         __source:unknown,
-        __args:unknown,
+        __args,
         __context: IApolloServerContext,
         __info: unknown
     ): Promise<Order[]> => {
-        return getOrderHistory()
+        
+        return getOrderHistory(__args.userId)
     }
 }
 
-export default getAllOrderQuery
+export default getAllOrder
