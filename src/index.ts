@@ -22,7 +22,9 @@ const startServer = () => {
             ApolloServerPluginLandingPageGraphQLPlayground(),
           ],
     })
-    server.listen().then(({url})=>{
+    // use port 3000 unless there exists a preconfigured port
+    var port = process.env.PORT || 4000;
+    server.listen(port).then(({url})=>{
         console.log(`Ready at ${url}graphql`)
     })
     .catch(err=> console.log(err))
